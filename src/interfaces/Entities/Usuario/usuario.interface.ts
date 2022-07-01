@@ -6,6 +6,6 @@ export default interface Usuario {
     activo?: boolean;
     cuenta_pago?: string;
 
-    //FK
+    //!FK
     id_rol: number;
 }

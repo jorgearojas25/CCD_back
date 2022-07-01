@@ -1,4 +1,4 @@
-export default interface Menu{
+export default interface Menu {
     id_menu?: number;
     nombre: string;
     decripcion: string;
@@ -6,5 +6,5 @@ export default interface Menu{
     activo: boolean;
 
     //! FK
-    id_restaurante: string;
+    id_restaurante: number;
 }
