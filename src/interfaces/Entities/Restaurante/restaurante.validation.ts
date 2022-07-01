@@ -3,7 +3,7 @@ import Joi from "joi";
 /**
  * Validation for add a Thing
  */
-const compraValidation = Joi.object({
+const restauranteValidation = Joi.object({
     id_restaurante: Joi.number(),
     nombre: Joi.string(),
     documento: Joi.string(),
@@ -13,4 +13,4 @@ const compraValidation = Joi.object({
     cuenta_pago: Joi.string(),
 });
 
-export default { compraValidation };
+export default { restauranteValidation };

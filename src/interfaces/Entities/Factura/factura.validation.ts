@@ -3,7 +3,7 @@ import Joi from "joi";
 /**
  * Validation for add a Thing
  */
-const compraValidation = Joi.object({
+const facturaValidation = Joi.object({
     id_factura: Joi.number(),
     cantidad: Joi.number(),
     valor_total: Joi.number(),
@@ -15,4 +15,4 @@ const compraValidation = Joi.object({
     id_ingrediente_menu: Joi.number(),
 });
 
-export default { compraValidation };
+export default { facturaValidation };

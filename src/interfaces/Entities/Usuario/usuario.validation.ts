@@ -3,7 +3,7 @@ import Joi from "joi";
 /**
  * Validation for add a Thing
  */
-const compraValidation = Joi.object({
+const usuarioValidation = Joi.object({
     id_usuario: Joi.number(),
     documento: Joi.string(),
     nombre: Joi.string(),
@@ -15,4 +15,4 @@ const compraValidation = Joi.object({
     id_rol: Joi.number(),
 });
 
-export default { compraValidation };
+export default { usuarioValidation };
