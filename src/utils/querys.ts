@@ -1,5 +1,5 @@
-function searchById(tableName: string, id: any): string {
-    const query = `SELECT * FROM ${tableName} WHERE id = ${id}`;
+function searchById(tableName: string, id: any, table_id: string): string {
+    const query = `SELECT * FROM ${tableName} WHERE ${table_id} = ${id}`;
 
     return query;
 }
@@ -10,8 +10,8 @@ function getAllRows(tableName: string): string {
     return query;
 }
 
-function deleteById(tableName: string, id: any): string {
-    const query = `DELETE FROM ${tableName} WHERE id = ${id}`;
+function deleteById(tableName: string, id: any, table_id: string): string {
+    const query = `DELETE FROM ${tableName} WHERE ${table_id} = ${id}`;
 
     return query;
 }

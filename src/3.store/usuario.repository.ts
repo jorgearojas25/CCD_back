@@ -4,7 +4,8 @@ import { connect } from "@/utils/db";
 import querys from "@/utils/querys";
 
 class UsuarioRepository implements Repository {
-    public entitieName = "usuario";
+    public entityName = "usuario";
+    public entityId = "id_usuario";
 
     /**
      * Get list of usuarios
@@ -13,7 +14,7 @@ class UsuarioRepository implements Repository {
         try {
             const conn = await connect();
             const usuarios = await conn.query(
-                querys.getAllRows(this.entitieName)
+                querys.getAllRows(this.entityName)
             );
 
             return usuarios[0];
@@ -30,7 +31,7 @@ class UsuarioRepository implements Repository {
         try {
             const conn = await connect();
             const usuarios = await conn.query(
-                querys.searchById(this.entitieName, id)
+                querys.searchById(this.entityName, id, this.entityId)
             );
 
             return usuarios[0];
@@ -47,7 +48,7 @@ class UsuarioRepository implements Repository {
         try {
             const conn = await connect();
             const newUsuario = await conn.query(
-                `INSERT INTO ${this.entitieName} SET ?`,
+                `INSERT INTO ${this.entityName} SET ?`,
                 usuario
             );
 
@@ -67,7 +68,7 @@ class UsuarioRepository implements Repository {
             const { id_usuario } = usuario;
             const conn = await connect();
             const updatedUsuario = await conn.query(
-                `UPDATE ${this.entitieName} SET ? WHERE id = ?`,
+                `UPDATE ${this.entityName} SET ? WHERE id = ?`,
                 [usuario, id_usuario]
             );
 
@@ -86,7 +87,7 @@ class UsuarioRepository implements Repository {
         try {
             const conn = await connect();
             const deletedUsuario = await conn.query(
-                querys.deleteById(this.entitieName, id)
+                querys.deleteById(this.entityName, id, this.entityId)
             );
 
             return deletedUsuario;

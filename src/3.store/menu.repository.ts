@@ -4,7 +4,8 @@ import { connect } from "@/utils/db";
 import querys from "@/utils/querys";
 
 class MenuRepository implements Repository {
-    public entitieName = "menu";
+    public entityName = "menu";
+    public entityId = "id_menu";
 
     /**
      * Get list of menus
@@ -12,7 +13,7 @@ class MenuRepository implements Repository {
     public async getMenus(): Promise<any | Menu[]> {
         try {
             const conn = await connect();
-            const menus = await conn.query(querys.getAllRows(this.entitieName));
+            const menus = await conn.query(querys.getAllRows(this.entityName));
 
             return menus[0];
         } catch (e) {
@@ -28,7 +29,7 @@ class MenuRepository implements Repository {
         try {
             const conn = await connect();
             const menus = await conn.query(
-                querys.searchById(this.entitieName, id)
+                querys.searchById(this.entityName, id, this.entityId)
             );
 
             return menus[0];
@@ -45,7 +46,7 @@ class MenuRepository implements Repository {
         try {
             const conn = await connect();
             const newMenu = await conn.query(
-                `INSERT INTO ${this.entitieName} SET ?`,
+                `INSERT INTO ${this.entityName} SET ?`,
                 menu
             );
 
@@ -65,7 +66,7 @@ class MenuRepository implements Repository {
             const { id_menu } = menu;
             const conn = await connect();
             const updatedMenu = await conn.query(
-                `UPDATE ${this.entitieName} SET ? WHERE id = ?`,
+                `UPDATE ${this.entityName} SET ? WHERE id = ?`,
                 [menu, id_menu]
             );
 
@@ -84,7 +85,7 @@ class MenuRepository implements Repository {
         try {
             const conn = await connect();
             const deletedMenu = await conn.query(
-                querys.deleteById(this.entitieName, id)
+                querys.deleteById(this.entityName, id, this.entityId)
             );
 
             return deletedMenu;

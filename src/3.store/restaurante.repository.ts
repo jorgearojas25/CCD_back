@@ -4,7 +4,8 @@ import { connect } from "@/utils/db";
 import querys from "@/utils/querys";
 
 class RestauranteRepository implements Repository {
-    public entitieName = "restaurante";
+    public entityName = "restaurante";
+    public entityId = "id_restaurante";
 
     /**
      * Get list of restaurantes
@@ -13,7 +14,7 @@ class RestauranteRepository implements Repository {
         try {
             const conn = await connect();
             const restaurantes = await conn.query(
-                querys.getAllRows(this.entitieName)
+                querys.getAllRows(this.entityName)
             );
 
             return restaurantes[0];
@@ -30,7 +31,7 @@ class RestauranteRepository implements Repository {
         try {
             const conn = await connect();
             const restaurantes = await conn.query(
-                querys.searchById(this.entitieName, id)
+                querys.searchById(this.entityName, id, this.entityId)
             );
 
             return restaurantes[0];
@@ -47,7 +48,7 @@ class RestauranteRepository implements Repository {
         try {
             const conn = await connect();
             const newRestaurante = await conn.query(
-                `INSERT INTO ${this.entitieName} SET ?`,
+                `INSERT INTO ${this.entityName} SET ?`,
                 restaurante
             );
 
@@ -67,7 +68,7 @@ class RestauranteRepository implements Repository {
             const { id_restaurante } = restaurante;
             const conn = await connect();
             const updatedRestaurante = await conn.query(
-                `UPDATE ${this.entitieName} SET ? WHERE id = ?`,
+                `UPDATE ${this.entityName} SET ? WHERE id = ?`,
                 [restaurante, id_restaurante]
             );
 
@@ -86,7 +87,7 @@ class RestauranteRepository implements Repository {
         try {
             const conn = await connect();
             const deletedRestaurante = await conn.query(
-                querys.deleteById(this.entitieName, id)
+                querys.deleteById(this.entityName, id, this.entityId)
             );
 
             return deletedRestaurante;

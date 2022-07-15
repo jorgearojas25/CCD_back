@@ -4,7 +4,8 @@ import { connect } from "@/utils/db";
 import querys from "@/utils/querys";
 
 class IngredienteRepository implements Repository {
-    public entitieName = "ingrediente";
+    public entityName = "ingrediente";
+    public entityId = "id_ingrediente";
 
     /**
      * Get list of ingredientes
@@ -13,7 +14,7 @@ class IngredienteRepository implements Repository {
         try {
             const conn = await connect();
             const ingredientes = await conn.query(
-                querys.getAllRows(this.entitieName)
+                querys.getAllRows(this.entityName)
             );
 
             return ingredientes[0];
@@ -30,7 +31,7 @@ class IngredienteRepository implements Repository {
         try {
             const conn = await connect();
             const ingredientes = await conn.query(
-                querys.searchById(this.entitieName, id)
+                querys.searchById(this.entityName, id, this.entityId)
             );
 
             return ingredientes[0];
@@ -47,7 +48,7 @@ class IngredienteRepository implements Repository {
         try {
             const conn = await connect();
             const newIngrediente = await conn.query(
-                `INSERT INTO ${this.entitieName} SET ?`,
+                `INSERT INTO ${this.entityName} SET ?`,
                 ingrediente
             );
 
@@ -67,7 +68,7 @@ class IngredienteRepository implements Repository {
             const { id_ingrediente } = ingrediente;
             const conn = await connect();
             const updatedIngrediente = await conn.query(
-                `UPDATE ${this.entitieName} SET ? WHERE id = ?`,
+                `UPDATE ${this.entityName} SET ? WHERE id = ?`,
                 [ingrediente, id_ingrediente]
             );
 
@@ -86,7 +87,7 @@ class IngredienteRepository implements Repository {
         try {
             const conn = await connect();
             const deletedIngrediente = await conn.query(
-                querys.deleteById(this.entitieName, id)
+                querys.deleteById(this.entityName, id, this.entityId)
             );
 
             return deletedIngrediente;

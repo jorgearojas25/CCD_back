@@ -4,7 +4,8 @@ import { connect } from "@/utils/db";
 import querys from "@/utils/querys";
 
 class CompraRepository implements Repository {
-    public entitieName = "compra";
+    public entityName = "compra";
+    public entityId = "id_compra";
 
     /**
      * Get list of compras
@@ -13,7 +14,7 @@ class CompraRepository implements Repository {
         try {
             const conn = await connect();
             const compras = await conn.query(
-                querys.getAllRows(this.entitieName)
+                querys.getAllRows(this.entityName)
             );
 
             return compras[0];
@@ -30,7 +31,7 @@ class CompraRepository implements Repository {
         try {
             const conn = await connect();
             const compras = await conn.query(
-                querys.searchById(this.entitieName, id)
+                querys.searchById(this.entityName, id, this.entityId)
             );
 
             return compras[0];
@@ -47,7 +48,7 @@ class CompraRepository implements Repository {
         try {
             const conn = await connect();
             const newCompra = await conn.query(
-                `INSERT INTO ${this.entitieName} SET ?`,
+                `INSERT INTO ${this.entityName} SET ?`,
                 compra
             );
 
@@ -67,7 +68,7 @@ class CompraRepository implements Repository {
             const { id_compra } = compra;
             const conn = await connect();
             const updatedCompra = await conn.query(
-                `UPDATE ${this.entitieName} SET ? WHERE id = ?`,
+                `UPDATE ${this.entityName} SET ? WHERE id = ?`,
                 [compra, id_compra]
             );
 
@@ -86,7 +87,7 @@ class CompraRepository implements Repository {
         try {
             const conn = await connect();
             const deletedCompra = await conn.query(
-                querys.deleteById(this.entitieName, id)
+                querys.deleteById(this.entityName, id, this.entityId)
             );
 
             return deletedCompra;

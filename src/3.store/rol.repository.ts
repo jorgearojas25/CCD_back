@@ -4,7 +4,8 @@ import { connect } from "@/utils/db";
 import querys from "@/utils/querys";
 
 class RolRepository implements Repository {
-    public entitieName = "rol";
+    public entityName = "rol";
+    public entityId = "id_rol";
 
     /**
      * Get list of rols
@@ -12,7 +13,7 @@ class RolRepository implements Repository {
     public async getRols(): Promise<any | Rol[]> {
         try {
             const conn = await connect();
-            const rols = await conn.query(querys.getAllRows(this.entitieName));
+            const rols = await conn.query(querys.getAllRows(this.entityName));
 
             return rols[0];
         } catch (e) {
@@ -28,7 +29,7 @@ class RolRepository implements Repository {
         try {
             const conn = await connect();
             const rols = await conn.query(
-                querys.searchById(this.entitieName, id)
+                querys.searchById(this.entityName, id, this.entityId)
             );
 
             return rols[0];
@@ -45,7 +46,7 @@ class RolRepository implements Repository {
         try {
             const conn = await connect();
             const newRol = await conn.query(
-                `INSERT INTO ${this.entitieName} SET ?`,
+                `INSERT INTO ${this.entityName} SET ?`,
                 rol
             );
 
@@ -65,7 +66,7 @@ class RolRepository implements Repository {
             const { id_rol } = rol;
             const conn = await connect();
             const updatedRol = await conn.query(
-                `UPDATE ${this.entitieName} SET ? WHERE id = ?`,
+                `UPDATE ${this.entityName} SET ? WHERE id = ?`,
                 [rol, id_rol]
             );
 
@@ -84,7 +85,7 @@ class RolRepository implements Repository {
         try {
             const conn = await connect();
             const deletedRol = await conn.query(
-                querys.deleteById(this.entitieName, id)
+                querys.deleteById(this.entityName, id, this.entityId)
             );
 
             return deletedRol;

@@ -4,7 +4,8 @@ import { connect } from "@/utils/db";
 import querys from "@/utils/querys";
 
 class ThingRepository implements Repository {
-    public entitieName = "thing";
+    public entityName = "thing";
+    public entityId = "id";
 
     /**
      * Get list of things
@@ -12,9 +13,7 @@ class ThingRepository implements Repository {
     public async getThings(): Promise<any | Thing[]> {
         try {
             const conn = await connect();
-            const things = await conn.query(
-                querys.getAllRows(this.entitieName)
-            );
+            const things = await conn.query(querys.getAllRows(this.entityName));
 
             return things[0];
         } catch (e) {
@@ -30,7 +29,7 @@ class ThingRepository implements Repository {
         try {
             const conn = await connect();
             const things = await conn.query(
-                querys.searchById(this.entitieName, id)
+                querys.searchById(this.entityName, id, this.entityId)
             );
 
             return things[0];
@@ -47,7 +46,7 @@ class ThingRepository implements Repository {
         try {
             const conn = await connect();
             const newThing = await conn.query(
-                `INSERT INTO ${this.entitieName} SET ?`,
+                `INSERT INTO ${this.entityName} SET ?`,
                 thing
             );
 
@@ -67,7 +66,7 @@ class ThingRepository implements Repository {
             const { id } = thing;
             const conn = await connect();
             const updatedThing = await conn.query(
-                `UPDATE ${this.entitieName} SET ? WHERE id = ?`,
+                `UPDATE ${this.entityName} SET ? WHERE id = ?`,
                 [thing, id]
             );
 
@@ -86,7 +85,7 @@ class ThingRepository implements Repository {
         try {
             const conn = await connect();
             const deletedThing = await conn.query(
-                querys.deleteById(this.entitieName, id)
+                querys.deleteById(this.entityName, id, this.entityId)
             );
 
             return deletedThing;

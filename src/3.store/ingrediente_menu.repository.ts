@@ -4,7 +4,8 @@ import { connect } from "@/utils/db";
 import querys from "@/utils/querys";
 
 class Ingrediente_menuRepository implements Repository {
-    public entitieName = "ingrediente_menu";
+    public entityName = "ingrediente_menu";
+    public entityId = "id_ingrediente_menu";
 
     /**
      * Get list of ingrediente_menus
@@ -13,7 +14,7 @@ class Ingrediente_menuRepository implements Repository {
         try {
             const conn = await connect();
             const ingrediente_menus = await conn.query(
-                querys.getAllRows(this.entitieName)
+                querys.getAllRows(this.entityName)
             );
 
             return ingrediente_menus[0];
@@ -32,7 +33,7 @@ class Ingrediente_menuRepository implements Repository {
         try {
             const conn = await connect();
             const ingrediente_menus = await conn.query(
-                querys.searchById(this.entitieName, id)
+                querys.searchById(this.entityName, id, this.entityId)
             );
 
             return ingrediente_menus[0];
@@ -51,7 +52,7 @@ class Ingrediente_menuRepository implements Repository {
         try {
             const conn = await connect();
             const newIngrediente_menu = await conn.query(
-                `INSERT INTO ${this.entitieName} SET ?`,
+                `INSERT INTO ${this.entityName} SET ?`,
                 ingrediente_menu
             );
 
@@ -73,7 +74,7 @@ class Ingrediente_menuRepository implements Repository {
             const { id_ingrediente_menu } = ingrediente_menu;
             const conn = await connect();
             const updatedIngrediente_menu = await conn.query(
-                `UPDATE ${this.entitieName} SET ? WHERE id = ?`,
+                `UPDATE ${this.entityName} SET ? WHERE id = ?`,
                 [ingrediente_menu, id_ingrediente_menu]
             );
 
@@ -92,7 +93,7 @@ class Ingrediente_menuRepository implements Repository {
         try {
             const conn = await connect();
             const deletedIngrediente_menu = await conn.query(
-                querys.deleteById(this.entitieName, id)
+                querys.deleteById(this.entityName, id, this.entityId)
             );
 
             return deletedIngrediente_menu;

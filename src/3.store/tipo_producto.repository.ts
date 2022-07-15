@@ -4,7 +4,8 @@ import { connect } from "@/utils/db";
 import querys from "@/utils/querys";
 
 class Tipo_productoRepository implements Repository {
-    public entitieName = "tipo_producto";
+    public entityName = "tipo_producto";
+    public entityId = "id_tipo_producto";
 
     /**
      * Get list of tipo_productos
@@ -13,7 +14,7 @@ class Tipo_productoRepository implements Repository {
         try {
             const conn = await connect();
             const tipo_productos = await conn.query(
-                querys.getAllRows(this.entitieName)
+                querys.getAllRows(this.entityName)
             );
 
             return tipo_productos[0];
@@ -30,7 +31,7 @@ class Tipo_productoRepository implements Repository {
         try {
             const conn = await connect();
             const tipo_productos = await conn.query(
-                querys.searchById(this.entitieName, id)
+                querys.searchById(this.entityName, id, this.entityId)
             );
 
             return tipo_productos[0];
@@ -47,7 +48,7 @@ class Tipo_productoRepository implements Repository {
         try {
             const conn = await connect();
             const newTipo_producto = await conn.query(
-                `INSERT INTO ${this.entitieName} SET ?`,
+                `INSERT INTO ${this.entityName} SET ?`,
                 tipo_producto
             );
 
@@ -69,7 +70,7 @@ class Tipo_productoRepository implements Repository {
             const { id_tipo_producto } = tipo_producto;
             const conn = await connect();
             const updatedTipo_producto = await conn.query(
-                `UPDATE ${this.entitieName} SET ? WHERE id = ?`,
+                `UPDATE ${this.entityName} SET ? WHERE id = ?`,
                 [tipo_producto, id_tipo_producto]
             );
 
@@ -88,7 +89,7 @@ class Tipo_productoRepository implements Repository {
         try {
             const conn = await connect();
             const deletedTipo_producto = await conn.query(
-                querys.deleteById(this.entitieName, id)
+                querys.deleteById(this.entityName, id, this.entityId)
             );
 
             return deletedTipo_producto;

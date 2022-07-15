@@ -4,7 +4,8 @@ import { connect } from "@/utils/db";
 import querys from "@/utils/querys";
 
 class ProductoRepository implements Repository {
-    public entitieName = "producto";
+    public entityName = "producto";
+    public entityId = "id_producto";
 
     /**
      * Get list of productos
@@ -13,7 +14,7 @@ class ProductoRepository implements Repository {
         try {
             const conn = await connect();
             const productos = await conn.query(
-                querys.getAllRows(this.entitieName)
+                querys.getAllRows(this.entityName)
             );
 
             return productos[0];
@@ -30,7 +31,7 @@ class ProductoRepository implements Repository {
         try {
             const conn = await connect();
             const productos = await conn.query(
-                querys.searchById(this.entitieName, id)
+                querys.searchById(this.entityName, id, this.entityId)
             );
 
             return productos[0];
@@ -47,7 +48,7 @@ class ProductoRepository implements Repository {
         try {
             const conn = await connect();
             const newProducto = await conn.query(
-                `INSERT INTO ${this.entitieName} SET ?`,
+                `INSERT INTO ${this.entityName} SET ?`,
                 producto
             );
 
@@ -67,7 +68,7 @@ class ProductoRepository implements Repository {
             const { id_producto } = producto;
             const conn = await connect();
             const updatedProducto = await conn.query(
-                `UPDATE ${this.entitieName} SET ? WHERE id = ?`,
+                `UPDATE ${this.entityName} SET ? WHERE id = ?`,
                 [producto, id_producto]
             );
 
@@ -86,7 +87,7 @@ class ProductoRepository implements Repository {
         try {
             const conn = await connect();
             const deletedProducto = await conn.query(
-                querys.deleteById(this.entitieName, id)
+                querys.deleteById(this.entityName, id, this.entityId)
             );
 
             return deletedProducto;

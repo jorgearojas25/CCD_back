@@ -4,7 +4,8 @@ import { connect } from "@/utils/db";
 import querys from "@/utils/querys";
 
 class FacturaRepository implements Repository {
-    public entitieName = "factura";
+    public entityName = "factura";
+    public entityId = "id_factura";
 
     /**
      * Get list of facturas
@@ -13,7 +14,7 @@ class FacturaRepository implements Repository {
         try {
             const conn = await connect();
             const facturas = await conn.query(
-                querys.getAllRows(this.entitieName)
+                querys.getAllRows(this.entityName)
             );
 
             return facturas[0];
@@ -30,7 +31,7 @@ class FacturaRepository implements Repository {
         try {
             const conn = await connect();
             const facturas = await conn.query(
-                querys.searchById(this.entitieName, id)
+                querys.searchById(this.entityName, id, this.entityId)
             );
 
             return facturas[0];
@@ -47,7 +48,7 @@ class FacturaRepository implements Repository {
         try {
             const conn = await connect();
             const newFactura = await conn.query(
-                `INSERT INTO ${this.entitieName} SET ?`,
+                `INSERT INTO ${this.entityName} SET ?`,
                 factura
             );
 
@@ -67,7 +68,7 @@ class FacturaRepository implements Repository {
             const { id_factura } = factura;
             const conn = await connect();
             const updatedFactura = await conn.query(
-                `UPDATE ${this.entitieName} SET ? WHERE id = ?`,
+                `UPDATE ${this.entityName} SET ? WHERE id = ?`,
                 [factura, id_factura]
             );
 
@@ -86,7 +87,7 @@ class FacturaRepository implements Repository {
         try {
             const conn = await connect();
             const deletedFactura = await conn.query(
-                querys.deleteById(this.entitieName, id)
+                querys.deleteById(this.entityName, id, this.entityId)
             );
 
             return deletedFactura;
