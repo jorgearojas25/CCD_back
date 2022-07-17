@@ -3,7 +3,7 @@ import Joi from "joi";
 /**
  * Validation for add a Thing
  */
-const productoMenuValidation = Joi.object({
+const producto_menuValidation = Joi.object({
     id_producto_menu: Joi.number(),
     cantidad: Joi.number(),
     editable: Joi.boolean(),
@@ -13,4 +13,4 @@ const productoMenuValidation = Joi.object({
     id_producto: Joi.number(),
 });
 
-export default { productoMenuValidation };
+export default { producto_menuValidation };
