@@ -261,3 +261,19 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- INSERT STATEMENTS
+-- -----------------------------------------------------
+
+INSERT INTO `ccddb`.`tipo_producto`
+(`nombre`,`activo`)
+VALUES
+('Entrada', 1), ('Entrada', 1), ('Plato Fuerte', 1), ('Postre', 1), ('Bebida', 1), ('Acompañamiento', 1);
+
+
+
+INSERT INTO `ccddb`.`rol`
+(`rol`,`activo`)
+VALUES
+('Usuario', 1), ('Admin', 1);
