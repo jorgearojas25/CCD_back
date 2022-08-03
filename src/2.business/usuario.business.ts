@@ -57,6 +57,19 @@ class UsuarioBusiness {
             throw e;
         }
     };
+
+    public login = async (
+        document: string,
+        password: string
+    ): Promise<Usuario[] | void> => {
+        try {
+            const user = await this.UsuarioRepository.login(document, password);
+
+            return user;
+        } catch (e) {
+            throw e;
+        }
+    };
 }
 
 export default UsuarioBusiness;

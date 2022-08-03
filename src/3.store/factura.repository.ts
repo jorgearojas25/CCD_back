@@ -68,7 +68,7 @@ class FacturaRepository implements Repository {
             const { id_factura } = factura;
             const conn = await connect();
             const updatedFactura = await conn.query(
-                `UPDATE ${this.entityName} SET ? WHERE id = ?`,
+                `UPDATE ${this.entityName} SET ? WHERE ${this.entityId} = ?`,
                 [factura, id_factura]
             );
 

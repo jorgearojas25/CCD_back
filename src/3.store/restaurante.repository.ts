@@ -68,7 +68,7 @@ class RestauranteRepository implements Repository {
             const { id_restaurante } = restaurante;
             const conn = await connect();
             const updatedRestaurante = await conn.query(
-                `UPDATE ${this.entityName} SET ? WHERE id = ?`,
+                `UPDATE ${this.entityName} SET ? WHERE ${this.entityId} = ?`,
                 [restaurante, id_restaurante]
             );
 

@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `ccddb`.`restaurante` (
   `id_restaurante` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
   `documento` VARCHAR(15) NOT NULL,
-  `constrasenia` VARCHAR(45) NOT NULL,
+  `contrasenia` VARCHAR(45) NOT NULL,
   `imagen` VARCHAR(45) NULL,
   `activo` TINYINT NOT NULL DEFAULT 1,
   `cuenta_pago` VARCHAR(45) NULL,

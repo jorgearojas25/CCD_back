@@ -68,7 +68,7 @@ class ProductoRepository implements Repository {
             const { id_producto } = producto;
             const conn = await connect();
             const updatedProducto = await conn.query(
-                `UPDATE ${this.entityName} SET ? WHERE id = ?`,
+                `UPDATE ${this.entityName} SET ? WHERE ${this.entityId} = ?`,
                 [producto, id_producto]
             );
 

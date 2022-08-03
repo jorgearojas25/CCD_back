@@ -27,6 +27,11 @@ class UsuarioNetwork implements Controller {
         this.router.get(`${this.path}/:id`, this.searchUsuarioById);
 
         /**
+         * Login method
+         */
+        this.router.post(`${this.path}/login`, this.login);
+
+        /**
          * Create one Usuario
          */
         this.router.post(
@@ -118,6 +123,23 @@ class UsuarioNetwork implements Controller {
         try {
             const data = await this.UsuarioBusiness.deleteUsuarioById(
                 req.params.id
+            );
+
+            response.success(res, data, 200, "Everyusuario is ok");
+        } catch (e: any) {
+            response.error(res, 500, "Internal Server Error", e);
+        }
+    };
+
+    private login = async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<void | Usuario[]> => {
+        try {
+            const data = await this.UsuarioBusiness.login(
+                req.body.document,
+                req.body.password
             );
 
             response.success(res, data, 200, "Everyusuario is ok");

@@ -68,7 +68,7 @@ class CompraRepository implements Repository {
             const { id_compra } = compra;
             const conn = await connect();
             const updatedCompra = await conn.query(
-                `UPDATE ${this.entityName} SET ? WHERE id = ?`,
+                `UPDATE ${this.entityName} SET ? WHERE ${this.entityId} = ?`,
                 [compra, id_compra]
             );
 

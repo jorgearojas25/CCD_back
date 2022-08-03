@@ -66,7 +66,7 @@ class RolRepository implements Repository {
             const { id_rol } = rol;
             const conn = await connect();
             const updatedRol = await conn.query(
-                `UPDATE ${this.entityName} SET ? WHERE id = ?`,
+                `UPDATE ${this.entityName} SET ? WHERE ${this.entityId} = ?`,
                 [rol, id_rol]
             );
 

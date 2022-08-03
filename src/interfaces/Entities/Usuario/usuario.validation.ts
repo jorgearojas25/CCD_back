@@ -7,7 +7,7 @@ const usuarioValidation = Joi.object({
     id_usuario: Joi.number(),
     documento: Joi.string(),
     nombre: Joi.string(),
-    contrasenia: Joi.string(),
+    contrasenia: Joi.string().allow(""),
     activo: Joi.boolean(),
     cuenta_pago: Joi.string(),
 

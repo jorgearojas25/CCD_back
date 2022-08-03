@@ -8,7 +8,7 @@ const restauranteValidation = Joi.object({
     nombre: Joi.string(),
     documento: Joi.string(),
     contrasenia: Joi.string(),
-    imagen: Joi.string(),
+    imagen: Joi.string().allow(""),
     activo: Joi.boolean(),
     cuenta_pago: Joi.string(),
 });

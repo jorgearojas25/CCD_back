@@ -68,7 +68,7 @@ class UsuarioRepository implements Repository {
             const { id_usuario } = usuario;
             const conn = await connect();
             const updatedUsuario = await conn.query(
-                `UPDATE ${this.entityName} SET ? WHERE id = ?`,
+                `UPDATE ${this.entityName} SET ? WHERE ${this.entityId} = ?`,
                 [usuario, id_usuario]
             );
 
@@ -91,6 +91,28 @@ class UsuarioRepository implements Repository {
             );
 
             return deletedUsuario;
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    public async login(document: string, password: string): Promise<any> {
+        try {
+            const conn = await connect();
+
+            const getUser = await conn.query(
+                `SELECT * FROM ${this.entityName} WHERE documento = ${document} AND constrasenia = ${password}`
+            );
+
+            if (!getUser) {
+                const getRes = await conn.query(
+                    `SELECT * FROM restaurante WHERE documento = ${document} AND constrasenia = ${password}`
+                );
+
+                return getRes;
+            }
+
+            return getUser;
         } catch (e) {
             throw e;
         }

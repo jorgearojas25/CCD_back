@@ -43,7 +43,9 @@ class App {
 
     public listen(): void {
         this.express.listen(this.port, () => {
-            console.log(`[app.ts] App listening on port ${this.port}`);
+            console.log(
+                `[app.ts] App listening on http://localhost:${this.port}`
+            );
         });
     }
 }

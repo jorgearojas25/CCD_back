@@ -70,7 +70,7 @@ class Producto_menuRepository implements Repository {
             const { id_producto_menu } = producto_menu;
             const conn = await connect();
             const updatedProducto_menu = await conn.query(
-                `UPDATE ${this.entityName} SET ? WHERE id = ?`,
+                `UPDATE ${this.entityName} SET ? WHERE ${this.entityId} = ?`,
                 [producto_menu, id_producto_menu]
             );
 

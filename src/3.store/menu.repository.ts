@@ -66,7 +66,7 @@ class MenuRepository implements Repository {
             const { id_menu } = menu;
             const conn = await connect();
             const updatedMenu = await conn.query(
-                `UPDATE ${this.entityName} SET ? WHERE id = ?`,
+                `UPDATE ${this.entityName} SET ? WHERE ${this.entityId} = ?`,
                 [menu, id_menu]
             );
 
