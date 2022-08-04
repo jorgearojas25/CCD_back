@@ -137,6 +137,7 @@ class UsuarioNetwork implements Controller {
         next: NextFunction
     ): Promise<void | Usuario[]> => {
         try {
+            console.log(req.body);
             const data = await this.UsuarioBusiness.login(
                 req.body.document,
                 req.body.password

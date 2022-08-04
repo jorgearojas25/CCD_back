@@ -101,18 +101,18 @@ class UsuarioRepository implements Repository {
             const conn = await connect();
 
             const getUser = await conn.query(
-                `SELECT * FROM ${this.entityName} WHERE documento = ${document} AND constrasenia = ${password}`
+                `SELECT * FROM ${this.entityName} WHERE documento = ${document} AND contrasenia = ${password}`
             );
 
             if (!getUser) {
                 const getRes = await conn.query(
-                    `SELECT * FROM restaurante WHERE documento = ${document} AND constrasenia = ${password}`
+                    `SELECT * FROM restaurante WHERE documento = ${document} AND contrasenia = ${password}`
                 );
 
-                return getRes;
+                return getRes[0];
             }
 
-            return getUser;
+            return getUser[0];
         } catch (e) {
             throw e;
         }
