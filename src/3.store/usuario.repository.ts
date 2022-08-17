@@ -104,7 +104,8 @@ class UsuarioRepository implements Repository {
                 `SELECT * FROM ${this.entityName} WHERE documento = ${document} AND contrasenia = ${password}`
             );
 
-            if (!getUser) {
+            if (!(Array.isArray(getUser[0]) && getUser[0].length)) {
+                console.log("reserse");
                 const getRes = await conn.query(
                     `SELECT * FROM restaurante WHERE documento = ${document} AND contrasenia = ${password}`
                 );

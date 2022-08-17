@@ -143,7 +143,7 @@ class UsuarioNetwork implements Controller {
                 req.body.password
             );
 
-            response.success(res, data, 200, "Everyusuario is ok");
+            response.success(res, data, 200, "Every usuario is ok");
         } catch (e: any) {
             response.error(res, 500, "Internal Server Error", e);
         }

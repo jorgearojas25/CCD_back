@@ -269,7 +269,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 INSERT INTO `ccddb`.`tipo_producto`
 (`nombre`,`activo`)
 VALUES
-('Entrada', 1), ('Entrada', 1), ('Plato Fuerte', 1), ('Postre', 1), ('Bebida', 1), ('Acompañamiento', 1);
+('Entrada', 1), ('Plato Fuerte', 1), ('Postre', 1), ('Bebida', 1), ('Acompañamiento', 1);
 
 
 
